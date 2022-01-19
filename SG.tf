@@ -217,7 +217,8 @@ resource "aci_logical_interface_context" "provider" {
   relation_vns_rs_l_if_ctx_to_bd = aci_bridge_domain.demo_service_bd.id
   relation_vns_rs_l_if_ctx_to_svc_redirect_pol = aci_service_redirect_policy.redir-pol.id
 }
-
+// Before pushing the code below, make sure the DN of vnsLDevVip, 
+// vnsRsALDevToPhysDomP, and vnsRsCIfAttN, and the vlan encap of vnsLIf matches your setup.
 resource "aci_rest" "l4-l7-device" {
   path       = "/api/mo/uni.json"
   payload = <<EOF

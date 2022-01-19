@@ -174,7 +174,7 @@ resource "aci_function_node" "node" {
   func_type  = "GoTo"
   routing_mode  = "Redirect"
   managed                           = "no"
-  relation_vns_rs_node_to_l_dev = "uni/tn-pmathame/lDevVip-fw"
+  relation_vns_rs_node_to_l_dev = format("%s/%s",aci_tenant.demo_tenant.id,"lDevVip-fw")
   }
 
 //Device Selection Policy
@@ -188,7 +188,8 @@ resource "aci_logical_device_context" "dsp" {
   description       = ""
   context           = ""
   name_alias        = ""
-  relation_vns_rs_l_dev_ctx_to_l_dev = "uni/tn-pmathame-TF/lDevVip-fw"
+  relation_vns_rs_l_dev_ctx_to_l_dev = format("%s/%s",aci_tenant.demo_tenant.id,"lDevVip-fw")
+
 }
 
 resource "aci_logical_interface_context" "consumer" {
@@ -199,7 +200,7 @@ resource "aci_logical_interface_context" "consumer" {
   l3_dest  = "yes"
   name_alias  = ""
   permit_log  = "no"
-  relation_vns_rs_l_if_ctx_to_l_if = "uni/tn-pmathame-TF/lDevVip-fw/lIf-oneleg"
+    relation_vns_rs_l_if_ctx_to_l_if = format("%s/%s",aci_tenant.demo_tenant.id,"lDevVip-fw/lIf-oneleg")
   relation_vns_rs_l_if_ctx_to_bd = aci_bridge_domain.demo_service_bd.id
   relation_vns_rs_l_if_ctx_to_svc_redirect_pol = aci_service_redirect_policy.redir-pol.id
 }
@@ -212,7 +213,7 @@ resource "aci_logical_interface_context" "provider" {
   l3_dest  = "yes"
   name_alias  = ""
   permit_log  = "no"
-  relation_vns_rs_l_if_ctx_to_l_if = "uni/tn-pmathame-TF/lDevVip-fw/lIf-oneleg"
+  relation_vns_rs_l_if_ctx_to_l_if = format("%s/%s",aci_tenant.demo_tenant.id,"lDevVip-fw/lIf-oneleg")
   relation_vns_rs_l_if_ctx_to_bd = aci_bridge_domain.demo_service_bd.id
   relation_vns_rs_l_if_ctx_to_svc_redirect_pol = aci_service_redirect_policy.redir-pol.id
 }

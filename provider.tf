@@ -4,6 +4,6 @@ provider "aci" {
   # cisco-aci password
   password = "cisco"
   # cisco-aci url
-  url      = "https://10.50.2.59"
+  url      = "https://10.10.10.10"
   insecure = true
 }
